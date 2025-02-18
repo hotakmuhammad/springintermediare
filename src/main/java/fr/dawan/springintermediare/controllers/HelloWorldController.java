@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.dawan.springintermediare.LogRunner;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 public class HelloWorldController {
     @Value("${message::Hello World}")
