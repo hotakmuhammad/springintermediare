@@ -1,0 +1,12 @@
+
+${AnsiBackground.RED}${AnsiColor.255}${AnsiStyle.BOLD}
+
+  _____ _____ ____ _____ 
+ |_   _| ____/ ___|_   _|
+   | | |  _| \___ \ | |  
+   | | | |___ ___) || |  
+   |_| |_____|____/ |_|  
+                         
+                         
+${AnsiBackground.DEFAULT}${AnsiColor.DEFAULT}${AnsiStyle.NORMAL}
+Spring Boot ${spring-boot.formated-version}
