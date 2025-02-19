@@ -17,10 +17,11 @@ public class SpringintermediareApplication implements CommandLineRunner {
 	    /*
 	     * 
 	    
-    	    SpringApplication app = new SpringApplication(SpringintermediareApplication.class);
-    	    app.setAddCommandLineProperties(false);
-    	    app.setBannerMode(Mode.OFF);
-    	    app.run(args);
+    	    SpringApplication app=new SpringApplication(SpringintermediareApplication.class);
+              app.setBannerMode(Mode.OFF);
+              app.setAddCommandLineProperties(false);
+              app.run(args);
+
 	     */
 		
 		
