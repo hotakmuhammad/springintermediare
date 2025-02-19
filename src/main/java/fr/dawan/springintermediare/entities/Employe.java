@@ -16,9 +16,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.TableGenerator;
 import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,20 +36,31 @@ import lombok.ToString;
 
 @Entity
 @Table(name="employes")
+/*
+ * 
 
 @TableGenerator(name="emp_generator", table="tab_gen", pkColumnName = "seq", valueColumnName = "next_id", initialValue = 1,
     allocationSize = 1)
+    
+*/
+//@SequenceGenerator(name = "seq_generator", sequenceName = "sequence1", allocationSize = 1, initialValue = 1)
 public class Employe implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY) // 2-> BDD auto_incremetn
-    @GeneratedValue(strategy = GenerationType.TABLE,generator = "emp_generator") //3-> ORM
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 2-> BDD auto_incremetn
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_generator") //3-> ORM
     private Long id;
+    
+    @Version
+    private int version;
+    
+    
     
     @Column(nullable=false, length=60)
     private String prenom;
+    
     
     @Column(nullable=false, length=60) //nullable = false -> NOT NULL
     private String nom;
