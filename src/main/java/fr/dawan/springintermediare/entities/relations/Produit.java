@@ -5,7 +5,6 @@ import java.util.Set;
 
 import fr.dawan.springintermediare.entities.heritage.BaseEntity;
 import fr.dawan.springintermediare.enums.Emballage;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -14,11 +13,11 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode.Exclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.ToString.Exclude;
 
 
 @NoArgsConstructor
@@ -52,7 +51,6 @@ public class Produit extends BaseEntity{
     
     @ManyToMany
     @Exclude
-
     private Set<Distributeur> distributeurs=new HashSet<>();
     
     
