@@ -51,23 +51,15 @@ public class Produit extends BaseEntity{
     
     @ManyToMany
     @Exclude
+//  @JoinTable(
+//  name="produits2distributeurs",
+//  joinColumns = @JoinColumn(name="id_produits"),
+//  inverseJoinColumns =  @JoinColumn(name="id_distributeurs")
+//  )
+
     private Set<Distributeur> distributeurs=new HashSet<>();
     
     
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
