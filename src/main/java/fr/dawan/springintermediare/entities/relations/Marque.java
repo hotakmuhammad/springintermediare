@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import fr.dawan.springintermediare.entities.auditing.BaseAuditing;
 import fr.dawan.springintermediare.entities.heritage.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +27,7 @@ import lombok.ToString.Exclude;
 @Entity
 @Table(name="marques")
 
-public class Marque extends BaseEntity{
+public class Marque extends BaseAuditing{
     private static final long serialVersionUID = 1L;
 
     @Column(nullable = false, length = 80)
@@ -42,11 +43,13 @@ public class Marque extends BaseEntity{
     @OneToMany(mappedBy = "marque")
     @Exclude
     private Set<Produit> produits=new HashSet<>();
+            
+        /*
+         * 	  relation unidirectionnelle avec un @OneToMany
+    		  @OneToMany
+    		  @JoinColumn(name="produits_id")
+    		  private Set<Produit> produits=new HashSet<>();
+         */
     
-
-    // relation unidirectionnelle avec un @OneToMany
-//  @OneToMany
-//  @JoinColumn(name="produits_id")
-//  private Set<Produit> produits=new HashSet<>();
 
 }

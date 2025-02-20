@@ -2,6 +2,7 @@ package fr.dawan.springintermediare;
 
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,6 +145,18 @@ public class RepositoryRunner implements CommandLineRunner {
         mcr.findByNomAndDateCreation("Marque B", LocalDate.of(1954,10,23)).forEach(p -> System.out.println(p));
 
 
+        //Auditing
+        Marque md = new Marque("Marque D", LocalDate.of(2000, 4, 1), null, new HashSet<>());
+        System.out.println(md);
+        md = marqueRepository.save(md);
+        System.out.println(md);
+        
+        Marque ma = marqueRepository.findById(1L).get();
+        ma.setDateCreation(LocalDate.of(1993, 7, 15));
+        ma = marqueRepository.save(ma);
+        System.out.println(ma);
+        
+        
     }
 
 }
