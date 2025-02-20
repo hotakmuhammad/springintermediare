@@ -116,6 +116,9 @@ public class RepositoryRunner implements CommandLineRunner {
         produitRepository.findByPrixGreaterThan(0.0,Pageable.unpaged()).forEach(p -> System.out.println(p));
         
         produitRepository.findByPrixGreaterThan(0.0,Sort.unsorted()).forEach(p -> System.out.println(p));
+        
+        System.out.println(produitRepository.moyenPrixEmballage(Emballage.CARTON));
+        
 
     }
 

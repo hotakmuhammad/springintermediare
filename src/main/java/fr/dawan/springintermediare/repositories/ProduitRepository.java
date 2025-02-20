@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import fr.dawan.springintermediare.entities.relations.Marque;
 import fr.dawan.springintermediare.entities.relations.Produit;
@@ -70,6 +72,39 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
 
     
     List<Produit> findByPrixGreaterThan(double prixMin, Sort trie);
+    
+    
+    //JPQL
+    
+    @Query("SELECT p FROM Produit p WHERE p.prix = :prixProduit")
+    List<Produit> findPrixJPQL(@Param("prixProduit") double prix);
+    
+    @Query("SELECT p FROM Produit p WHERE p.prix < :prixProduit")
+    List<Produit> findByPrixInferieurAJPQL(double prixProduit);
+    
+    
+    @Query("FROM Produit p WHERE p.prix < ?1AND emballage = ?2")
+    List<Produit> findByPrixEtEmballageJPQL(double prixMax, Emballage emb);
+    
+    
+    //Expression de chemin -> la relation doit être @ManyToOne ou @OneToOne
+    @Query("FROM Produit p WHERE p.marque.nom = :nomMarque")
+    List<Produit> getByNomMarque(String nomMarque);
+    
+    
+    // erreur @ManyToMany @Query("FROM Produit p WHERE p.distributeurs.nom = : nomDistributeur")
+    @Query("FROM Produit p JOIN p.distributeurs d WHERE d.nom = :nomDistributeur")
+    List<Produit> getByNomDistributeur(String nomDistributeur);
+    
+    
+    @Query("SELECT avg(p.prix) FROM Produit p GROUP BY p.emballage HAVING p.emballage = :emb")
+    double moyenPrixEmballage(Emballage emb);
+    
+    
+    
+    
+    
+    
     
     
 }
