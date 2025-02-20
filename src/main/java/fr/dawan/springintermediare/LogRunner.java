@@ -1,6 +1,7 @@
 package fr.dawan.springintermediare;
 
 import org.springframework.boot.CommandLineRunner;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

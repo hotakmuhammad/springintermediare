@@ -1,7 +1,6 @@
 package fr.dawan.springintermediare.entities.manytomanywithdata;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;

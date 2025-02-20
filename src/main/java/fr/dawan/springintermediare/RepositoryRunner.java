@@ -4,14 +4,12 @@ package fr.dawan.springintermediare;
 import java.time.LocalDate;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
@@ -19,6 +17,7 @@ import org.springframework.stereotype.Component;
 import fr.dawan.springintermediare.entities.relations.Marque;
 import fr.dawan.springintermediare.entities.relations.Produit;
 import fr.dawan.springintermediare.enums.Emballage;
+import fr.dawan.springintermediare.repositories.MarqueCustomRepository;
 import fr.dawan.springintermediare.repositories.MarqueRepository;
 import fr.dawan.springintermediare.repositories.ProduitRepository;
 
@@ -34,6 +33,10 @@ public class RepositoryRunner implements CommandLineRunner {
     
     @Autowired
     private MarqueRepository marqueRepository;
+    
+    @Autowired
+    private MarqueCustomRepository mcr;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -119,6 +122,27 @@ public class RepositoryRunner implements CommandLineRunner {
         
         System.out.println(produitRepository.moyenPrixEmballage(Emballage.CARTON));
         
+        produitRepository.moyenPrixEmballage().forEach(p -> System.out.println(p));
+        
+        produitRepository.findByPrixSQL(19.0).forEach(p -> System.out.println(p));
+        
+        // DELETE, UPDATE
+        int nbProduit=produitRepository.deleteByMarqueNom("Marque C");
+        System.out.println(nbProduit);
+        
+        produitRepository.augmentationPrix(1.025, 50.0);
+
+
+        produitRepository.augmentationPrix(1.025, 50.0);
+
+        System.out.println(produitRepository.countByPrix(100.0));
+
+        System.out.println(produitRepository.get_count_by_prix(100.0));
+    
+        mcr.findByNomAndDateCreation("Marque B", null).forEach(p -> System.out.println(p));
+        mcr.findByNomAndDateCreation(null, LocalDate.of(1954,10,23)).forEach(p -> System.out.println(p));
+        mcr.findByNomAndDateCreation("Marque B", LocalDate.of(1954,10,23)).forEach(p -> System.out.println(p));
+
 
     }
 

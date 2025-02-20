@@ -9,14 +9,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
+import fr.dawan.springintermediare.entities.PrixEmballage;
 import fr.dawan.springintermediare.entities.relations.Marque;
 import fr.dawan.springintermediare.entities.relations.Produit;
 import fr.dawan.springintermediare.enums.Emballage;
+import jakarta.transaction.Transactional;
 
 //@Repository
+@Transactional
 public interface ProduitRepository extends JpaRepository<Produit, Long> {
 
     List<Produit> findByPrix(double prixRechercher);
@@ -101,9 +106,36 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     double moyenPrixEmballage(Emballage emb);
     
     
+    @Query("SELECT new fr.dawan.springintermediare.entities.PrixEmballage(avg(p.prix),p.emballage) FROM Produit p GROUP BY p.emballage")
+    List<PrixEmballage> moyenPrixEmballage();
     
     
+    //SQL
     
+    @Query(nativeQuery = true,  value = "SELECT * FROM produits WHERE prix = :prixProduit")
+    List<Produit> findByPrixSQL(double prixProduit);
+    
+    //DELETE , UPDATE
+    
+    // nom de méthode
+    // void deleteByMarqueNom(String nomMarque);
+    int deleteByMarqueNom(String nomMarque);
+    
+    // JPQL
+    @Modifying
+    @Query("DELETE FROM Produit p WHERE p.marque.nom = :nomMarque")
+    void effacerParNomMarque(String nomMarque);
+    
+    @Modifying
+    @Query("UPDATE Produit p SET p.prix=p.prix*:pAugmentation WHERE prix>:prixMinimum")
+    void augmentationPrix(double pAugmentation,double prixMinimum);
+
+    //Procedure stockée
+    @Procedure("GET_COUNT_BY_PRIX")
+    int countByPrix(double prixMax);
+    
+    @Procedure
+    int get_count_by_prix(double prixMax);
     
     
     
