@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import fr.dawan.springintermediare.dtos.MarqueDto;
+import jakarta.validation.Valid;
 
 
 
@@ -21,8 +22,8 @@ public interface MarqueService {
     
     void deleteByID(long id);
     
-    MarqueDto create(MarqueDto dto);
+    MarqueDto create(@Valid MarqueDto dto);
     
-    MarqueDto update(MarqueDto dto, long id);
+    MarqueDto update(@Valid MarqueDto dto, long id);
     
 }

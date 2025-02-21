@@ -41,11 +41,22 @@ public class ServiceRunner implements CommandLineRunner {
         
         MarqueDto dtoE4 = service.getById(dtoE2.getId());
         System.out.println(dtoE4);
-        dtoE4.setNom("Marque E2");
-        dtoE4.setCouleur("FF0000");
-        service.getAll(Pageable.unpaged()).forEach(m -> System.out.println(m));
         
-        //service.deleteByID(dtoE2.getId());
+        
+        dtoE4.setNom("");
+        dtoE4.setCouleur("FF");
+        MarqueDto dtoE5;
+        try {
+            dtoE5 = service.update(dtoE4, dtoE4.getId());
+            System.out.println(dtoE5);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+     
+        
+        
+        service.deleteByID(dtoE2.getId());
         
         service.getAll(Pageable.unpaged()).forEach(m -> System.out.println(m));
     }

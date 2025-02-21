@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import fr.dawan.springintermediare.dtos.MarqueDto;
 import fr.dawan.springintermediare.entities.relations.Marque;
@@ -19,6 +20,7 @@ import fr.dawan.springintermediare.services.MarqueService;
 
 @Service
 @Transactional
+@Validated
 public class MarqueServiceImpl implements MarqueService {
     
     
@@ -28,6 +30,13 @@ public class MarqueServiceImpl implements MarqueService {
     // 1 Constructeur @Autowired implicite
     private MarqueMapper mapper;
 
+    // 1 constructeur = @Autowired implicite
+    public MarqueServiceImpl(MarqueRepository repository, MarqueMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
+
+    @Transactional(readOnly = true)
     @Override
     public Page<MarqueDto> getAll(Pageable page) {
         
@@ -59,10 +68,6 @@ public class MarqueServiceImpl implements MarqueService {
 
     }
 
-    public MarqueServiceImpl(MarqueRepository repository, MarqueMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
 
 
     @Override
@@ -73,7 +78,7 @@ public class MarqueServiceImpl implements MarqueService {
 
     @Override
     public MarqueDto update(MarqueDto dto, long id) {
-        Marque marque = repository.findById(id).orElseThrow();
+        Marque marque = repository.findById(id).orElseThrow(()-> new IdNotFoundException());
         mapper.update(dto, marque);
         return mapper.toDto(repository.save(marque));
         
