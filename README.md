@@ -1,2 +1,2 @@
 # springintermediare
-Formation Spring Intermédiaire : Web Services REST + Persistance avec Spring Data JPA - J2 - j3
+Formation Spring Intermédiaire : Web Services REST + Persistance avec Spring Data JPA - J2 - j5
