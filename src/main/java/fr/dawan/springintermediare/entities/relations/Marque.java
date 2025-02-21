@@ -6,6 +6,7 @@ import java.util.Set;
 
 import fr.dawan.springintermediare.entities.auditing.BaseAuditing;
 import fr.dawan.springintermediare.entities.heritage.BaseEntity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -36,7 +37,7 @@ public class Marque extends BaseAuditing{
     @Column(name="date_creation")
     private LocalDate dateCreation;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @Exclude
     private IndentiteGraphique identiteGraph;
 
