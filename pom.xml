@@ -83,10 +83,16 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
+<<<<<<< HEAD
         <dependency>
+=======
+        <!--
+         <dependency>
+>>>>>>> c786f64eec67c0562d63131dec6177046420bd6c
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+        -->
     </dependencies>
 
     <build>
